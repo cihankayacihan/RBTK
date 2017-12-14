@@ -1,0 +1,4 @@
+appdirs
+requests>=0.10.1
+pygments>=1.6
+toposort>=1.5

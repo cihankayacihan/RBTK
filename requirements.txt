@@ -1,0 +1,16 @@
+# feel free to make these version numbers higher if needed
+
+# any version should have what porcupine/dirs.py needs
+# https://github.com/ActiveState/appdirs/blob/master/CHANGES.rst
+appdirs
+
+# this is just for the pastebin plugin, any python 3 compatible
+# requests should work
+# https://github.com/kennethreitz/requests/blob/master/HISTORY.rst
+requests>=0.10.1
+
+# pygments docs say "new in 1.6" about many things that porcupine uses
+pygments>=1.6
+
+# CircularDependencyError was added in 1.5, see changelog in pypi
+toposort>=1.5
