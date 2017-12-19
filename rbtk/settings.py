@@ -8,7 +8,7 @@ import os
 import sys
 import tkinter
 import tkinter.font as tkfont
-from tkinter import messagebox, ttk
+from tkinter import messagebox, ttk, filedialog
 import types
 
 # the pygments stuff is just for _validate_pygments_style_name()
@@ -412,6 +412,9 @@ def _init():
         pass      # use defaults everywhere
 
     general = get_section('General')   # type: _ConfigSection
+
+    general.add_option('workspace_location',)
+
 
     fixedfont = tkfont.Font(name='TkFixedFont', exists=True)
     font_families = [family for family in tkfont.families()

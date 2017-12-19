@@ -4,6 +4,8 @@ from tkinter import filedialog
 
 import rbtk
 
+last_options = {}
+
 def _dialog(action, last_path):
     # pygments supports so many different kinds of file types that
     # showing them all would be insane

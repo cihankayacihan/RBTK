@@ -267,12 +267,12 @@ def start_pasting(pastebin_name):
     Paste(pastebin_name, code, origin).start()
 
 
-def setup():
-    tabtypes = [tabs.FileTab]
-    if pythonprompt is not None:
-        tabtypes.append(pythonprompt.PromptTab)
+# def setup():
+#     tabtypes = [tabs.FileTab]
+#     if pythonprompt is not None:
+#         tabtypes.append(pythonprompt.PromptTab)
 
-    for name in sorted(_pastebins, key=str.casefold):
-        assert '/' not in name, "rbtk.add_action() needs to be fixed"
-        callback = functools.partial(start_pasting, name)
-        rbtk.add_action(callback, "Share/" + name, tabtypes=tabtypes)
+#     for name in sorted(_pastebins, key=str.casefold):
+#         assert '/' not in name, "rbtk.add_action() needs to be fixed"
+#         callback = functools.partial(start_pasting, name)
+#         rbtk.add_action(callback, "Share/" + name, tabtypes=tabtypes)

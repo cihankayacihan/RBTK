@@ -59,5 +59,5 @@ def on_click():
         widget['autoseparators'] = True
 
 
-def setup():
-    rbtk.add_action(on_click, "Tools/autopep8", tabtypes=[tabs.FileTab])
+#def setup():
+#    rbtk.add_action(on_click, "Tools/autopep8", tabtypes=[tabs.FileTab])

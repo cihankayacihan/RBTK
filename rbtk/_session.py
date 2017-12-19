@@ -114,8 +114,6 @@ def setup_actions():
         functools.partial(settings.show_dialog, rbtk.get_main_window()),
         "Edit/RBTK Settings...")
 
-    menubar.get_menu("Color Themes")   # this goes between Edit and View
-
     # the font size stuff are bound by the textwidget itself, that's why
     # there are Nones everywhere
     add_action(
@@ -187,7 +185,7 @@ def setup_actions():
         options['foreground'] = options['activebackground'] = fg
         options['background'] = options['activeforeground'] = bg
 
-        menubar.get_menu("Color Themes").add_radiobutton(**options)
+       # menubar.get_menu("Color Themes").add_radiobutton(**options)
 
 def add_action(callback, menupath=None, keyboard_shortcut=(None, None),
                tabtypes=(None, tabs.Tab)):
