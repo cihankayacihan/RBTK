@@ -8,7 +8,7 @@ import os
 import sys
 import tkinter
 import tkinter.font as tkfont
-from tkinter import messagebox, ttk
+from tkinter import messagebox, ttk, filedialog
 import types
 
 # the pygments stuff is just for _validate_pygments_style_name()
@@ -62,6 +62,7 @@ _sections = {}
 _loaded_json = {}
 _dialog = None          # the "Porcupine Settings" window
 _notebook = None        # main widget in the dialog
+_bng_sim = None 
 
 
 def get_section(section_name):
@@ -383,6 +384,7 @@ def _validate_pygments_style_name(name):
 def _init():
     global _dialog
     global _notebook
+    global _bng_sim
 
     if _dialog is not None:
         # already initialized
@@ -412,6 +414,9 @@ def _init():
         pass      # use defaults everywhere
 
     general = get_section('General')   # type: _ConfigSection
+
+    #general.add_option('workspace_location',)
+
 
     fixedfont = tkfont.Font(name='TkFixedFont', exists=True)
     font_families = [family for family in tkfont.families()
@@ -444,16 +449,30 @@ def _init():
     general.add_option('pygments_style', 'default', reset=False)
     general.connect('pygments_style', _validate_pygments_style_name)
 
-    filetypes = get_section('File Types')
-    label = ttk.Label(filetypes.content_frame, text=(
-        "Currently there's no GUI for changing filetype specific "
-        "settings, but they're stored in filetypes.ini and you can "
-        "edit it yourself."))
+    simulations = get_section('Simulation')
+    label = ttk.Label(simulations.content_frame, text=(
+        "Set BNG2.pl location and workspace"))
     label.pack(fill='x')
-    filetypes.content_frame.bind(      # automatic wrapping
+    simulations.content_frame.bind(      # automatic wrapping
         '<Configure>',
         lambda event: label.config(wraplength=event.width),
         add=True)
+
+
+    def bngDirSet():
+        global _bng_sim
+
+        import tkfiledialog
+        _bng_sim.bngdirset.set(tkfiledialog.askdirectory())
+
+    bng_0 = ttk.Label(simulations.content_frame, text="BNG2.pl Path:")
+    bng_0.pack()
+    _bng_sim.bngDirSet.set("")
+    bng_1 = ttk.Entry(simulations.content_frame, textvariable=_bng_sim.bngdirset)
+    bng_1.pack()
+    bng_2 = ttk.Button(simulations.content_frame, text="Browse", command=bngDirSet)
+    bng_2.pack()
+    
 
     def edit_it():
         # porcupine/tabs.py imports this file
@@ -465,7 +484,7 @@ def _init():
         manager.add_tab(tabs.FileTab.open_file(manager, path))
         _dialog.withdraw()
 
-    ttk.Button(filetypes.content_frame, text="Edit filetypes.ini",
+    ttk.Button(simulations.content_frame, text="Edit filetypes.ini",
                command=edit_it).pack(anchor='center')
 
 
